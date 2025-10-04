@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Quiz Practice</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center mt-5" id="quizForm">
+        <form class="w-50 bg-secondary-subtle p-3 position-relative rounded">
+            <div>
+                <h2>Valorant Quiz</h2>
+            </div>
+
+            <div class="question">
+                <p>1. Agent mana yang memiliki skill "Blinding Light"?</p>
+                <div class="options d-flex flex-column ps-3 m-0 p-0">
+                    <label><input type="radio" name="q1" value="a"> Phoenix</label>
+                    <label><input type="radio" name="q1" value="b"> Breach</label>
+                    <label><input type="radio" name="q1" value="c"> Reyna</label>
+                </div>
+            </div>
+            <div class="question mt-2">
+                <p>2. Senjata mana yang paling mahal di dalam game?</p>
+                <div class="options d-flex flex-column ps-3">
+                    <label><input type="radio" name="q2" value="a"> Phantom</label>
+                    <label><input type="radio" name="q2" value="b"> Operator</label>
+                    <label><input type="radio" name="q2" value="c"> Vandal</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>3. Agent mana yang dapat menghidupkan kembali rekan satu tim?</p>
+                <div class="options d-flex flex-column ps-3">
+                    <label><input type="radio" name="q3" value="a"> Sage</label>
+                    <label><input type="radio" name="q3" value="b"> Skye</label>
+                    <label><input type="radio" name="q3" value="c"> Omen</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>4. Berapa total harga dari Spike?</p>
+                <div class="options d-flex flex-column ps-3">
+                    <label><input type="radio" name="q4" value="a"> 200 credits</label>
+                    <label><input type="radio" name="q4" value="b"> 400 credits</label>
+                    <label><input type="radio" name="q4" value="c"> 0 credits</label>
+                </div>
+            </div>
+
+            <div id="result" class="alert mt-3 d-none"></div>
+            <button type="submit" class="btn btn-primary w-100 ">Submit</button>
+        </form>
+    </div>
+
+
+    <script>
+        const correctAnswers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'a',
+            q4: 'c'
+        };
+
+        const quizForm = document.getElementById('quizForm');
+        const resultDiv = document.getElementById('result');
+
+        quizForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let score = 0;
+            const allQuestions = Object.keys(correctAnswers);
+
+            allQuestions.forEach(questionName => {
+                const selectedAnswer = quizForm.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedAnswer && selectedAnswer.value === correctAnswers[questionName]) {
+                    score++;
+                }
+            });
+
+            const totalQuestions = allQuestions.length;
+            const scorePercentage = (score / totalQuestions) * 100;
+
+            let message = `Your Score: ${score}/${totalQuestions}.`;
+
+            if (scorePercentage === 100) {
+                message += ` Perfect! 🎉`;
+                resultDiv.className = 'alert alert-success mt-3';
+            } else if (scorePercentage >= 50) {
+                message += ` Good job! 👍`;
+                resultDiv.className = 'alert alert-warning mt-3';
+            } else {
+                message += ` Try again! 😥`;
+                resultDiv.className = 'alert alert-danger mt-3';
+            }
+
+            resultDiv.textContent = message;
+            resultDiv.classList.remove("d-none");
+        });
+    </script>
+
+</body>
+
+</html>
