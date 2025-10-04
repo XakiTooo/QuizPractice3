@@ -4,27 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Form Pendaftaran</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="d-flex justify-content-center mt-5" id=;>
-        <form class="w-25">
+<body class="bg-light">
+    <div class="d-flex justify-content-center mt-5">
+        <form class="w-50 bg-white p-5 rounded shadow">
+            <h2 class="text-center mb-4 text-primary">Form Pendaftaran</h2>
             <div class="mb-3">
-                <label for="Name" class="form-label">nama</label>
+                <label for="Name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="Name">
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">email</label>
+                <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email">
             </div>
             <div class="mb-3">
-                <label for="Password" class="form-label">password</label>
+                <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password">
             </div>
             <div class="mb-3">
-                <label for="Date" class="form-label">tanggal lahir</label>
+                <label for="Date" class="form-label">Tanggal Lahir</label>
                 <input type="date" class="form-control" id="Date">
             </div>
             <div class="mb-3">
@@ -35,26 +36,21 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-primary" id="submitbutton">Submit</button>
+            <button type="submit" class="btn btn-primary w-100" id="submitbutton">Submit</button>
         </form>
     </div>
 
     <script>
-        // Dapatkan elemen berdasarkan ID
-        const submitbutton = document.getElementById("submitbutton");
-        const passwordInput = document.getElementById("password"); // Asumsi ID input password adalah "password"
+        const form = document.querySelector("form");
+        const passwordInput = document.getElementById("password");
 
-        // Tambahkan event listener ke form untuk event 'submit'
-        submitbutton.addEventListener("click", function (event) {
-            // Mencegah form melakukan submit dan me-refresh halaman
+        form.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            // Memeriksa panjang password
             if (passwordInput.value.length < 8) {
                 alert("Password kurang dari 8 karakter!");
             } else {
                 alert("Berhasil masuk!");
-                // Pindah ke halaman lain
                 window.location.href = "quiz.html";
             }
         });
